@@ -1,13 +1,14 @@
-import datetime
 import os
 import dotenv
 from SingleDice import SingleRoll
-from interactions import listen, slash_command, SlashContext, Client, Intents, SlashCommandChoice, OptionType, Embed, BrandColors, SlashCommandOption
-import markdown_strings
+from MultiDice import MultiRoll
+from CustomDice import CustomRoll
+from interactions import listen, slash_command, SlashContext, Client, Intents, SlashCommandChoice, OptionType, Embed, BrandColors, SlashCommandOption, slash_option, Timestamp
 
 bot = Client()
 intents = Intents.DEFAULT
 dotenv.load_dotenv()
+server_id = [1211283623840325632]
 
 
 @listen()
@@ -15,69 +16,179 @@ async def on_ready():
     print("Bot ONLINE!")
 
 
-@slash_command(name="rollsingle",
-               description="Roll a single dice!",
-               dm_permission=False,
-               options=[
-                   SlashCommandOption(name="dice",
-                                      description="Select a dice",
-                                      required=True,
-                                      type=OptionType.INTEGER,
-                                      choices=[SlashCommandChoice(name="D4", value=1),
-                                               SlashCommandChoice(name="D6", value=2),
-                                               SlashCommandChoice(name="D8", value=3),
-                                               SlashCommandChoice(name="D10", value=4),
-                                               SlashCommandChoice(name="D12", value=5),
-                                               SlashCommandChoice(name="D20", value=6),
-                                               SlashCommandChoice(name="D100", value=7)
-                                               ])
-               ],
-               scopes=[1211283623840325632])
-async def rollsingle_function(ctx: SlashContext, dice: int):
+def dices_option():
+    def wrapper(func):
+        return slash_option(
+            name="dice",
+            description="Select a dice",
+            required=True,
+            opt_type=OptionType.INTEGER,
+            choices=[SlashCommandChoice(name="D4", value=1),
+                     SlashCommandChoice(name="D6", value=2),
+                     SlashCommandChoice(name="D8", value=3),
+                     SlashCommandChoice(name="D10", value=4),
+                     SlashCommandChoice(name="D12", value=5),
+                     SlashCommandChoice(name="D20", value=6),
+                     SlashCommandChoice(name="D100", value=7)
+                     ]
+        )(func)
+    return wrapper
+
+
+@slash_command(name="single", description="Roll a single dice!", dm_permission=False, scopes=server_id)
+@dices_option()
+async def single_function(ctx: SlashContext, dice: int):
     match dice:
         case 1:
             embed = Embed(title="Single D4 Roll",
-                          description=markdown_strings.header(f"D4: [{SingleRoll.single_d4()}]", 2),
+                          description=SingleRoll.single_d4(),
                           color=BrandColors.WHITE,
-                          timestamp=datetime.datetime.now())
+                          timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 2:
             embed = Embed(title="Single D6 Roll",
-                          description=markdown_strings.header(f"D6: [{SingleRoll.single_d6()}]", 2),
+                          description=SingleRoll.single_d6(),
                           color=BrandColors.WHITE,
-                          timestamp=datetime.datetime.now())
+                          timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 3:
             embed = Embed(title="Single D8 Roll",
-                          description=markdown_strings.header(f"D8: [{SingleRoll.single_d8()}]",2),
+                          description=SingleRoll.single_d8(),
                           color=BrandColors.WHITE,
-                          timestamp=datetime.datetime.now())
+                          timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 4:
             embed = Embed(title="Single D10 Roll",
-                          description=markdown_strings.header(f"D10: [{SingleRoll.single_d10()}]",2),
+                          description=SingleRoll.single_d10(),
                           color=BrandColors.WHITE,
-                          timestamp=datetime.datetime.now())
+                          timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 5:
             embed = Embed(title="Single D12 Roll",
-                          description=markdown_strings.header(f"D12: [{SingleRoll.single_d12()}]",2),
+                          description=SingleRoll.single_d12(),
                           color=BrandColors.WHITE,
-                          timestamp=datetime.datetime.now())
+                          timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 6:
             embed = Embed(title="Single D20 Roll",
-                          description=markdown_strings.header(f"D20: [{SingleRoll.single_d20()}]",2),
+                          description=SingleRoll.single_d20(),
                           color=BrandColors.WHITE,
-                          timestamp=datetime.datetime.now())
+                          timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 7:
             embed = Embed(title="Single D100 Roll",
-                          description=markdown_strings.header(f"D100: [{SingleRoll.single_d100()}]",2),
+                          description=SingleRoll.single_d100(),
                           color=BrandColors.WHITE,
-                          timestamp=datetime.datetime.now())
+                          timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case _:
             await ctx.send("You didn't select a dice. Aborting...")
+
+
+@slash_command(name="multi",
+               description="Roll multiple dices!",
+               dm_permission=False,
+               options=[
+                   SlashCommandOption(
+                       name="count",
+                       description="How many times do you wish to roll the dice?",
+                       required=True,
+                       type=OptionType.INTEGER
+                   )
+               ],
+               scopes=server_id)
+@dices_option()
+async def multi_function(ctx: SlashContext, dice: int, count: int):
+    match dice:
+        case 1:
+            embed = Embed(title="Multi D4 Roll",
+                          description=MultiRoll.multi_d4(count),
+                          color=BrandColors.WHITE,
+                          timestamp=Timestamp.now())
+            await ctx.send(embeds=embed)
+        case 2:
+            embed = Embed(title="Multi D6 Roll",
+                          description=MultiRoll.multi_d6(count),
+                          color=BrandColors.WHITE,
+                          timestamp=Timestamp.now())
+            await ctx.send(embeds=embed)
+        case 3:
+            embed = Embed(title="Multi D8 Roll",
+                          description=MultiRoll.multi_d8(count),
+                          color=BrandColors.WHITE,
+                          timestamp=Timestamp.now())
+            await ctx.send(embeds=embed)
+        case 4:
+            embed = Embed(title="Multi D10 Roll",
+                          description=MultiRoll.multi_d10(count),
+                          color=BrandColors.WHITE,
+                          timestamp=Timestamp.now())
+            await ctx.send(embeds=embed)
+        case 5:
+            embed = Embed(title="Multi D12 Roll",
+                          description=MultiRoll.multi_d12(count),
+                          color=BrandColors.WHITE,
+                          timestamp=Timestamp.now())
+            await ctx.send(embeds=embed)
+        case 6:
+            embed = Embed(title="Multi D20 Roll",
+                          description=MultiRoll.multi_d20(count),
+                          color=BrandColors.WHITE,
+                          timestamp=Timestamp.now())
+            await ctx.send(embeds=embed)
+        case 7:
+            embed = Embed(title="Multi D100 Roll",
+                          description=MultiRoll.multi_d100(count),
+                          color=BrandColors.WHITE,
+                          timestamp=Timestamp.now())
+            await ctx.send(embeds=embed)
+        case _:
+            await ctx.send("You didn't select a dice. Aborting...")
+
+
+@slash_command(name="custom_single",
+               description="A single roll of custom dice!",
+               dm_permission=False,
+               options=[
+                   SlashCommandOption(
+                       name="size",
+                       description="What's the size of the dice you wish to roll?",
+                       required=True,
+                       type=OptionType.INTEGER
+                   )
+               ],
+               scopes=server_id)
+async def custom_single_function(ctx: SlashContext, size: int):
+    embed = Embed(title="Custom Dice Single Roll",
+                  description=CustomRoll.single_custom(size),
+                  color=BrandColors.WHITE,
+                  timestamp=Timestamp.now())
+    await ctx.send(embeds=embed)
+
+
+@slash_command(name="custom_multi",
+               description="Multiple rolls of custom dices!",
+               dm_permission=False,
+               options=[
+                   SlashCommandOption(
+                       name="size",
+                       description="What's the size of the dice you wish to roll?",
+                       required=True,
+                       type=OptionType.INTEGER
+                   ),
+                   SlashCommandOption(
+                       name="count",
+                       description="How many times do you wish to roll the dice?",
+                       required=True,
+                       type=OptionType.INTEGER
+                   )
+               ],
+               scopes=server_id)
+async def custom_multi_function(ctx: SlashContext, size: int, count: int):
+    embed = Embed(title="Custom Dice Multi Roll",
+                  description=CustomRoll.multi_custom(size, count),
+                  color=BrandColors.WHITE,
+                  timestamp=Timestamp.now())
+    await ctx.send(embeds=embed)
 
 bot.start(os.getenv("token"))

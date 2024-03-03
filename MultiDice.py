@@ -4,13 +4,13 @@ import markdown_strings
 
 class MultiRoll:
     """Class that contains functions for rolling multiple dices of each type.
-
+        ‎
     Each function is declared as a static method, as we do not need an object instance of this class.
     Each function accepts an <int> type variable named "count" which defines how many rolls will be executed, contains an internal variable named after the dice that'll be rolled (e.g. d4, d8, d20), which is an empty <list>, and lastly, another <int> type internal variable "sum_of_dx" (e.g. sum_of_d4, sum_of_d20) which contains a sum of all rolls.
-
+        ‎
     Upon executing the function, 2 for-loops are put in motion. 1st loop generates the numbers in range 1 - x, where x is the max digit of the dice (see example below). The randomized number is generated using the function 'randint' from Python's built-in 'random.py' module.
     2nd loop sums up all generated numbers from 1st loop to its respective "sum_of_dx" variable.
-
+        ‎
     Once both loops have done their respective tasks, the function returns a chain of f-strings formatted with Markdown language using markdown_strings package.
 
     Example:
@@ -18,7 +18,7 @@ class MultiRoll:
         It equals to 'random.randint(1, 100)'
     """
     @staticmethod
-    def multi_d4(count):
+    def multi_d4(count: int):
         d4 = []
         sum_of_d4 = 0
 
@@ -33,7 +33,7 @@ class MultiRoll:
             f"{markdown_strings.bold('Total: ' + str(sum_of_d4))}"
 
     @staticmethod
-    def multi_d6(count):
+    def multi_d6(count: int):
         d6 = []
         sum_of_d6 = 0
 
@@ -48,7 +48,7 @@ class MultiRoll:
             f"{markdown_strings.bold('Total: ' + str(sum_of_d6))}"
 
     @staticmethod
-    def multi_d8(count):
+    def multi_d8(count: int):
         d8 = []
         sum_of_d8 = 0
 
@@ -63,7 +63,7 @@ class MultiRoll:
             f"{markdown_strings.bold('Total: ' + str(sum_of_d8))}"
 
     @staticmethod
-    def multi_d10(count):
+    def multi_d10(count: int):
         d10 = []
         sum_of_d10 = 0
 
@@ -78,7 +78,7 @@ class MultiRoll:
             f"{markdown_strings.bold('Total: ' + str(sum_of_d10))}"
 
     @staticmethod
-    def multi_d12(count):
+    def multi_d12(count: int):
         d12 = []
         sum_of_d12 = 0
 
@@ -93,7 +93,7 @@ class MultiRoll:
             f"{markdown_strings.bold('Total: ' + str(sum_of_d12))}"
 
     @staticmethod
-    def multi_d20(count):
+    def multi_d20(count: int):
         d20 = []
         sum_of_d20 = 0
 
@@ -108,7 +108,7 @@ class MultiRoll:
             f"{markdown_strings.bold('Total: ' + str(sum_of_d20))}"
 
     @staticmethod
-    def multi_d100(count):
+    def multi_d100(count: int):
         d100 = []
         sum_of_d100 = 0
 
