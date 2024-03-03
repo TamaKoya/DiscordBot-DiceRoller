@@ -28,7 +28,7 @@ class MultiRoll:
         for dice in range(len(d4)):
             sum_of_d4 = sum_of_d4 + d4[dice]
 
-        return f"{markdown_strings.header('D4: ', 2)}" + \
+        return f"{markdown_strings.header(f'{count}D4: ', 2)}" + \
             f"{d4}\n\n" + \
             f"{markdown_strings.bold('Total: ' + str(sum_of_d4))}"
 
@@ -43,7 +43,7 @@ class MultiRoll:
         for dice in range(len(d6)):
             sum_of_d6 = sum_of_d6 + d6[dice]
 
-        return f"{markdown_strings.header('D6: ', 2)}" + \
+        return f"{markdown_strings.header(f'{count}D6: ', 2)}" + \
             f"{d6}\n\n" + \
             f"{markdown_strings.bold('Total: ' + str(sum_of_d6))}"
 
@@ -58,7 +58,7 @@ class MultiRoll:
         for dice in range(len(d8)):
             sum_of_d8 = sum_of_d8 + d8[dice]
 
-        return f"{markdown_strings.header('D8: ', 2)}" + \
+        return f"{markdown_strings.header(f'{count}D8: ', 2)}" + \
             f"{d8}\n\n" + \
             f"{markdown_strings.bold('Total: ' + str(sum_of_d8))}"
 
@@ -73,7 +73,7 @@ class MultiRoll:
         for dice in range(len(d10)):
             sum_of_d10 = sum_of_d10 + d10[dice]
 
-        return f"{markdown_strings.header('D10: ', 2)}" + \
+        return f"{markdown_strings.header(f'{count}D10: ', 2)}" + \
             f"{d10}\n\n" + \
             f"{markdown_strings.bold('Total: ' + str(sum_of_d10))}"
 
@@ -88,7 +88,7 @@ class MultiRoll:
         for dice in range(len(d12)):
             sum_of_d12 = sum_of_d12 + d12[dice]
 
-        return f"{markdown_strings.header('D12: ', 2)}" + \
+        return f"{markdown_strings.header(f'{count}D12: ', 2)}" + \
             f"{d12}\n\n" + \
             f"{markdown_strings.bold('Total: ' + str(sum_of_d12))}"
 
@@ -103,7 +103,7 @@ class MultiRoll:
         for dice in range(len(d20)):
             sum_of_d20 = sum_of_d20 + d20[dice]
 
-        return f"{markdown_strings.header('D20: ', 2)}" + \
+        return f"{markdown_strings.header(f'{count}D20: ', 2)}" + \
             f"{d20}\n\n" + \
             f"{markdown_strings.bold('Total: ' + str(sum_of_d20))}"
 
@@ -118,6 +118,6 @@ class MultiRoll:
         for dice in range(len(d100)):
             sum_of_d100 = sum_of_d100 + d100[dice]
 
-        return f"{markdown_strings.header('D100: ', 2)}" + \
+        return f"{markdown_strings.header(f'{count}D100: ', 2)}" + \
             f"{d100}\n\n" + \
             f"{markdown_strings.bold('Total: ' + str(sum_of_d100))}"
