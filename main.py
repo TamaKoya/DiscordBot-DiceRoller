@@ -35,49 +35,72 @@ def dices_option():
     return wrapper
 
 
+def roll_modifier():
+    def wrapper(func):
+        return slash_option(
+            name="modifier",
+            description="OPTIONAL - Add a modifier to your roll",
+            required=False,
+            opt_type=OptionType.INTEGER
+        )(func)
+    return wrapper
+
+
+def roll_title():
+    def wrapper(func):
+        return slash_option(
+            name="roll-name",
+            description="OPTIONAL - Name your roll dice",
+            required=False,
+            opt_type=OptionType.STRING
+        )(func)
+    return wrapper
+
+
 @slash_command(name="single", description="Roll a single dice!", dm_permission=False, scopes=server_id)
 @dices_option()
+@roll_modifier()
 async def single_function(ctx: SlashContext, dice: int):
     match dice:
         case 1:
             embed = Embed(title="Single D4 Roll",
-                          description=SingleRoll.single_d4(),
+                          description=SingleRoll.single_dice(dice),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 2:
             embed = Embed(title="Single D6 Roll",
-                          description=SingleRoll.single_d6(),
+                          description=SingleRoll.single_dice(dice),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 3:
             embed = Embed(title="Single D8 Roll",
-                          description=SingleRoll.single_d8(),
+                          description=SingleRoll.single_dice(dice),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 4:
             embed = Embed(title="Single D10 Roll",
-                          description=SingleRoll.single_d10(),
+                          description=SingleRoll.single_dice(dice),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 5:
             embed = Embed(title="Single D12 Roll",
-                          description=SingleRoll.single_d12(),
+                          description=SingleRoll.single_dice(dice),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 6:
             embed = Embed(title="Single D20 Roll",
-                          description=SingleRoll.single_d20(),
+                          description=SingleRoll.single_dice(dice),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 7:
             embed = Embed(title="Single D100 Roll",
-                          description=SingleRoll.single_d100(),
+                          description=SingleRoll.single_dice(dice),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
