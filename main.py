@@ -49,47 +49,47 @@ def roll_modifier():
 @slash_command(name="single", description="Roll a single dice!", dm_permission=False, scopes=server_id)
 @dices_option()
 @roll_modifier()
-async def single_function(ctx: SlashContext, dice: int):
+async def single_function(ctx: SlashContext, dice: int, modifier: int = 0):
     match dice:
         case 1:
             embed = Embed(title="Single D4 Roll",
-                          description=SingleRoll.single_dice(dice),
+                          description=SingleRoll.single_dice(dice, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 2:
             embed = Embed(title="Single D6 Roll",
-                          description=SingleRoll.single_dice(dice),
+                          description=SingleRoll.single_dice(dice, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 3:
             embed = Embed(title="Single D8 Roll",
-                          description=SingleRoll.single_dice(dice),
+                          description=SingleRoll.single_dice(dice, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 4:
             embed = Embed(title="Single D10 Roll",
-                          description=SingleRoll.single_dice(dice),
+                          description=SingleRoll.single_dice(dice, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 5:
             embed = Embed(title="Single D12 Roll",
-                          description=SingleRoll.single_dice(dice),
+                          description=SingleRoll.single_dice(dice, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 6:
             embed = Embed(title="Single D20 Roll",
-                          description=SingleRoll.single_dice(dice),
+                          description=SingleRoll.single_dice(dice, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 7:
             embed = Embed(title="Single D100 Roll",
-                          description=SingleRoll.single_dice(dice),
+                          description=SingleRoll.single_dice(dice, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
@@ -110,47 +110,48 @@ async def single_function(ctx: SlashContext, dice: int):
                ],
                scopes=server_id)
 @dices_option()
-async def multi_function(ctx: SlashContext, dice: int, count: int):
+@roll_modifier()
+async def multi_function(ctx: SlashContext, dice: int, count: int, modifier: int = 0):
     match dice:
         case 1:
             embed = Embed(title="Multi D4 Roll",
-                          description=MultiRoll.multi_dice(dice, count),
+                          description=MultiRoll.multi_dice(dice, count, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 2:
             embed = Embed(title="Multi D6 Roll",
-                          description=MultiRoll.multi_dice(dice, count),
+                          description=MultiRoll.multi_dice(dice, count, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 3:
             embed = Embed(title="Multi D8 Roll",
-                          description=MultiRoll.multi_dice(dice, count),
+                          description=MultiRoll.multi_dice(dice, count, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 4:
             embed = Embed(title="Multi D10 Roll",
-                          description=MultiRoll.multi_dice(dice, count),
+                          description=MultiRoll.multi_dice(dice, count, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 5:
             embed = Embed(title="Multi D12 Roll",
-                          description=MultiRoll.multi_dice(dice, count),
+                          description=MultiRoll.multi_dice(dice, count, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 6:
             embed = Embed(title="Multi D20 Roll",
-                          description=MultiRoll.multi_dice(dice, count),
+                          description=MultiRoll.multi_dice(dice, count, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 7:
             embed = Embed(title="Multi D100 Roll",
-                          description=MultiRoll.multi_dice(dice, count),
+                          description=MultiRoll.multi_dice(dice, count, modifier),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
@@ -176,9 +177,10 @@ async def multi_function(ctx: SlashContext, dice: int, count: int):
                    )
                ],
                scopes=server_id)
-async def custom_single_function(ctx: SlashContext, size: int, title: str):
+@roll_modifier()
+async def custom_single_function(ctx: SlashContext, size: int, title: str, modifier: int = 0):
     embed = Embed(title=title,
-                  description=CustomRoll.single_custom(size),
+                  description=CustomRoll.single_custom(size, modifier),
                   color=BrandColors.WHITE,
                   timestamp=Timestamp.now())
     await ctx.send(embeds=embed)
@@ -208,9 +210,10 @@ async def custom_single_function(ctx: SlashContext, size: int, title: str):
                    )
                ],
                scopes=server_id)
-async def custom_multi_function(ctx: SlashContext, size: int, count: int, title: str):
+@roll_modifier()
+async def custom_multi_function(ctx: SlashContext, size: int, count: int, title: str, modifier: int = 0):
     embed = Embed(title=title,
-                  description=CustomRoll.multi_custom(size, count),
+                  description=CustomRoll.multi_custom(size, count, modifier),
                   color=BrandColors.WHITE,
                   timestamp=Timestamp.now())
     await ctx.send(embeds=embed)

@@ -18,9 +18,9 @@ class SingleRoll:
         ‎
     The function is declared as a static method, as we do not need an object instance of this class.
 
-    The function accepts an <int> type variable named "dice", which defines the dice that'll be rolled (e.g. d4, d8, d20).
+    The function accepts an <int> type variable named "dice", which defines the dice that'll be rolled (e.g. d4, d8, d20) and an <int> variable named "modifier", which defines modifiers for rolls (e.g +2, -2, +5) and by default it equals 0.
 
-    Upon receiving the value of "dice", the function will return a randomized number in range 1 - x, where x is the max digit of the dice. The randomized number is generated using the function 'randint' from Python's built-in 'random.py' module.
+    Upon receiving the value of "dice", the function will return a randomized number in range 1 - x, where x is the max digit of the dice. The randomized number is generated using the function 'randint' from Python's built-in 'random.py' module. Then the modifier is added to the generated number and returned as "modified_dice".
         ‎
     For example:
         With a D100, we can roll a number ranging from 1 to 100, which means that the range is 1 - 100.
@@ -28,6 +28,8 @@ class SingleRoll:
     """
 
     @staticmethod
-    def single_dice(dice: int):
+    def single_dice(dice: int, modifier: int):
         rolled_dice = random.randint(1, dices[dice])
-        return markdown_strings.header(f"{rolled_dice}", 2)
+        modified_dice = rolled_dice + modifier
+        return markdown_strings.header(f"{modified_dice}({rolled_dice})\n", 2) + \
+            markdown_strings.bold(f"Modifier: {modifier}")

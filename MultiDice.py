@@ -17,7 +17,7 @@ class MultiRoll:
     """Class that contains a function for rolling multiple dices of each type.
         ‎
     The function is declared as a static method, as we do not need an object instance of this class.
-    This function accepts 2 <int> type variables named "dice" and "count", which defines the dice that'll be rolled (e.g. d4, d8, d20) and which defines how many rolls will be executed respectively.
+    This function accepts 3 <int> type variables named "dice", "count" and "modifier", which defines the dice that'll be rolled (e.g. d4, d8, d20), which defines how many rolls will be executed and an <int> variable named "modifier", which defines modifiers for rolls (e.g +2, -2, +5) and by default it equals 0 respectively.
     It uses 2 internal variables "rolled_dices" which is an empty <list> and an internal <int> type variable "sum_of_rolls" which contains a sum of all rolls.
         ‎
     Upon executing the function, 2 for-loops are put in motion. 1st loop generates the numbers in range 1 - x, where x is the max digit of the dice (see example below). The randomized number is generated using the function 'randint' from Python's built-in 'random.py' module.
@@ -30,7 +30,7 @@ class MultiRoll:
         It equals to 'random.randint(1, 100)'
     """
     @staticmethod
-    def multi_dice(dice: int, count: int):
+    def multi_dice(dice: int, count: int, modifier: int):
         rolled_dices = []
         sum_of_rolls = 0
 
@@ -38,7 +38,7 @@ class MultiRoll:
             rolled_dices.append(random.randint(1, dices[dice]))
 
         for dice in range(len(rolled_dices)):
-            sum_of_rolls = sum_of_rolls + rolled_dices[dice]
+            sum_of_rolls = sum_of_rolls + rolled_dices[dice] + modifier
 
         return markdown_strings.header(f"{rolled_dices}\n\n", 2) + \
-            f"{markdown_strings.bold('Total: ' + str(sum_of_rolls))}"
+            markdown_strings.bold(f'Total: {str(sum_of_rolls)} |' + ' ' + f'Modifier: {modifier}')
