@@ -30,4 +30,4 @@ class SingleRoll:
     @staticmethod
     def single_dice(dice: int):
         rolled_dice = random.randint(1, dices[dice])
-        return markdown_strings.header(f"D{dices[dice]}: {rolled_dice}", 2)
+        return markdown_strings.header(f"{rolled_dice}", 2)

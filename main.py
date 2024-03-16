@@ -46,17 +46,6 @@ def roll_modifier():
     return wrapper
 
 
-def roll_title():
-    def wrapper(func):
-        return slash_option(
-            name="roll-name",
-            description="OPTIONAL - Name your roll dice",
-            required=False,
-            opt_type=OptionType.STRING
-        )(func)
-    return wrapper
-
-
 @slash_command(name="single", description="Roll a single dice!", dm_permission=False, scopes=server_id)
 @dices_option()
 @roll_modifier()
@@ -125,43 +114,43 @@ async def multi_function(ctx: SlashContext, dice: int, count: int):
     match dice:
         case 1:
             embed = Embed(title="Multi D4 Roll",
-                          description=MultiRoll.multi_d4(count),
+                          description=MultiRoll.multi_dice(dice, count),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 2:
             embed = Embed(title="Multi D6 Roll",
-                          description=MultiRoll.multi_d6(count),
+                          description=MultiRoll.multi_dice(dice, count),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 3:
             embed = Embed(title="Multi D8 Roll",
-                          description=MultiRoll.multi_d8(count),
+                          description=MultiRoll.multi_dice(dice, count),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 4:
             embed = Embed(title="Multi D10 Roll",
-                          description=MultiRoll.multi_d10(count),
+                          description=MultiRoll.multi_dice(dice, count),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 5:
             embed = Embed(title="Multi D12 Roll",
-                          description=MultiRoll.multi_d12(count),
+                          description=MultiRoll.multi_dice(dice, count),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 6:
             embed = Embed(title="Multi D20 Roll",
-                          description=MultiRoll.multi_d20(count),
+                          description=MultiRoll.multi_dice(dice, count),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
         case 7:
             embed = Embed(title="Multi D100 Roll",
-                          description=MultiRoll.multi_d100(count),
+                          description=MultiRoll.multi_dice(dice, count),
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
@@ -178,11 +167,17 @@ async def multi_function(ctx: SlashContext, dice: int, count: int):
                        description="What's the size of the dice you wish to roll?",
                        required=True,
                        type=OptionType.INTEGER
+                   ),
+                   SlashCommandOption(
+                       name="title",
+                       description="What's this roll about?",
+                       required=True,
+                       type=OptionType.STRING
                    )
                ],
                scopes=server_id)
-async def custom_single_function(ctx: SlashContext, size: int):
-    embed = Embed(title="Custom Dice Single Roll",
+async def custom_single_function(ctx: SlashContext, size: int, title: str):
+    embed = Embed(title=title,
                   description=CustomRoll.single_custom(size),
                   color=BrandColors.WHITE,
                   timestamp=Timestamp.now())
@@ -204,11 +199,17 @@ async def custom_single_function(ctx: SlashContext, size: int):
                        description="How many times do you wish to roll the dice?",
                        required=True,
                        type=OptionType.INTEGER
+                   ),
+                   SlashCommandOption(
+                       name="title",
+                       description="What's this roll about?",
+                       required=True,
+                       type=OptionType.STRING
                    )
                ],
                scopes=server_id)
-async def custom_multi_function(ctx: SlashContext, size: int, count: int):
-    embed = Embed(title="Custom Dice Multi Roll",
+async def custom_multi_function(ctx: SlashContext, size: int, count: int, title: str):
+    embed = Embed(title=title,
                   description=CustomRoll.multi_custom(size, count),
                   color=BrandColors.WHITE,
                   timestamp=Timestamp.now())
