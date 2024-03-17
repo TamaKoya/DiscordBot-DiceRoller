@@ -4,16 +4,26 @@ from SingleDice import SingleRoll
 from MultiDice import MultiRoll
 from CustomDice import CustomRoll
 from interactions import listen, slash_command, SlashContext, Client, Intents, SlashCommandChoice, OptionType, Embed, BrandColors, SlashCommandOption, slash_option, Timestamp
+from flask import Flask, render_template
+from flask_cors import CORS
 
 bot = Client()
 intents = Intents.DEFAULT
 dotenv.load_dotenv()
 server_id = [1211283623840325632]
+web_app = Flask(__name__)
+CORS(web_app, resources={r'/*': {'origins': '*'}})
+
+
+@web_app.route('/')
+def gm_dice_page():
+    return render_template('gm_dice.html')
 
 
 @listen()
 async def on_ready():
     print("Bot ONLINE!")
+    web_app.run(debug=True)
 
 
 def dices_option():

@@ -21,7 +21,6 @@ class CustomRoll:
         return markdown_strings.header(f"D{size}: {modified_dice}({custom_single_dice})\n", 2) + \
             markdown_strings.bold(f"Modifier: {modifier}")
 
-
     @staticmethod
     def multi_custom(size: int, count: int, modifier: int):
         custom_multi_dice = []
