@@ -30,7 +30,9 @@ class CustomRoll:
             custom_multi_dice.append(random.randint(1, size))
 
         for dice in range(len(custom_multi_dice)):
-            sum_of_custom = sum_of_custom + custom_multi_dice[dice] + modifier
+            sum_of_custom = sum_of_custom + custom_multi_dice[dice]
+
+        sum_of_custom = sum_of_custom + modifier
 
         return markdown_strings.header(f'{count}D{size}: ', 2) + \
             f"{custom_multi_dice}\n\n" + \

@@ -38,7 +38,9 @@ class MultiRoll:
             rolled_dices.append(random.randint(1, dices[dice]))
 
         for dice in range(len(rolled_dices)):
-            sum_of_rolls = sum_of_rolls + rolled_dices[dice] + modifier
+            sum_of_rolls = sum_of_rolls + rolled_dices[dice]
+
+        sum_of_rolls = sum_of_rolls + modifier
 
         return markdown_strings.header(f"{rolled_dices}\n\n", 2) + \
             markdown_strings.bold(f'Total: {str(sum_of_rolls)} |' + ' ' + f'Modifier: {modifier}')

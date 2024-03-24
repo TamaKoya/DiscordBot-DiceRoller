@@ -1,29 +1,22 @@
 import os
 import dotenv
+import logging
 from SingleDice import SingleRoll
 from MultiDice import MultiRoll
 from CustomDice import CustomRoll
 from interactions import listen, slash_command, SlashContext, Client, Intents, SlashCommandChoice, OptionType, Embed, BrandColors, SlashCommandOption, slash_option, Timestamp
-from flask import Flask, render_template
-from flask_cors import CORS
 
 bot = Client()
 intents = Intents.DEFAULT
 dotenv.load_dotenv()
 server_id = [1211283623840325632]
-web_app = Flask(__name__)
-CORS(web_app, resources={r'/*': {'origins': '*'}})
-
-
-@web_app.route('/')
-def gm_dice_page():
-    return render_template('gm_dice.html')
+logging.basicConfig(filename='logs.txt', filemode='w', format='%(asctime)s - %(message)s', level=logging.WARNING, encoding='utf-8')
 
 
 @listen()
 async def on_ready():
     print("Bot ONLINE!")
-    web_app.run(debug=True)
+    logging.warning("Bot ONLINE!")
 
 
 def dices_option():
@@ -62,47 +55,61 @@ def roll_modifier():
 async def single_function(ctx: SlashContext, dice: int, modifier: int = 0):
     match dice:
         case 1:
+            result = SingleRoll.single_dice(dice, modifier)
             embed = Embed(title="Single D4 Roll",
-                          description=SingleRoll.single_dice(dice, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a single roll of D4. The result was - {result}   || Format: total(rolled dice) ||")
         case 2:
+            result = SingleRoll.single_dice(dice, modifier)
             embed = Embed(title="Single D6 Roll",
-                          description=SingleRoll.single_dice(dice, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a single roll of D6. The result was - {result}   || Format: total(rolled dice) ||")
         case 3:
+            result = SingleRoll.single_dice(dice, modifier)
             embed = Embed(title="Single D8 Roll",
-                          description=SingleRoll.single_dice(dice, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a single roll of D8. The result was - {result}   || Format: total(rolled dice) ||")
         case 4:
+            result = SingleRoll.single_dice(dice, modifier)
             embed = Embed(title="Single D10 Roll",
-                          description=SingleRoll.single_dice(dice, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a single roll of D10. The result was - {result}   || Format: total(rolled dice) ||")
         case 5:
+            result = SingleRoll.single_dice(dice, modifier)
             embed = Embed(title="Single D12 Roll",
-                          description=SingleRoll.single_dice(dice, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a single roll of D12. The result was - {result}   || Format: total(rolled dice) ||")
         case 6:
+            result = SingleRoll.single_dice(dice, modifier)
             embed = Embed(title="Single D20 Roll",
-                          description=SingleRoll.single_dice(dice, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a single roll of D20. The result was - {result}   || Format: total(rolled dice) ||")
         case 7:
+            result = SingleRoll.single_dice(dice, modifier)
             embed = Embed(title="Single D100 Roll",
-                          description=SingleRoll.single_dice(dice, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a single roll of D100. The result was - {result}   || Format: total(rolled dice) ||")
         case _:
             await ctx.send("You didn't select a dice. Aborting...")
 
@@ -124,47 +131,61 @@ async def single_function(ctx: SlashContext, dice: int, modifier: int = 0):
 async def multi_function(ctx: SlashContext, dice: int, count: int, modifier: int = 0):
     match dice:
         case 1:
+            result = MultiRoll.multi_dice(dice, count, modifier)
             embed = Embed(title="Multi D4 Roll",
-                          description=MultiRoll.multi_dice(dice, count, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a multi roll of D4. The result was: {result}, amount of dices: {count}.")
         case 2:
+            result = MultiRoll.multi_dice(dice, count, modifier)
             embed = Embed(title="Multi D6 Roll",
-                          description=MultiRoll.multi_dice(dice, count, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a multi roll of D4. The result was: {result}, amount of dices: {count}.")
         case 3:
+            result = MultiRoll.multi_dice(dice, count, modifier)
             embed = Embed(title="Multi D8 Roll",
-                          description=MultiRoll.multi_dice(dice, count, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a multi roll of D4. The result was: {result}, amount of dices: {count}.")
         case 4:
+            result = MultiRoll.multi_dice(dice, count, modifier)
             embed = Embed(title="Multi D10 Roll",
-                          description=MultiRoll.multi_dice(dice, count, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a multi roll of D4. The result was: {result}, amount of dices: {count}.")
         case 5:
+            result = MultiRoll.multi_dice(dice, count, modifier)
             embed = Embed(title="Multi D12 Roll",
-                          description=MultiRoll.multi_dice(dice, count, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a multi roll of D4. The result was: {result}, amount of dices: {count}.")
         case 6:
+            result = MultiRoll.multi_dice(dice, count, modifier)
             embed = Embed(title="Multi D20 Roll",
-                          description=MultiRoll.multi_dice(dice, count, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a multi roll of D4. The result was: {result}, amount of dices: {count}.")
         case 7:
+            result = MultiRoll.multi_dice(dice, count, modifier)
             embed = Embed(title="Multi D100 Roll",
-                          description=MultiRoll.multi_dice(dice, count, modifier),
+                          description=result,
                           color=BrandColors.WHITE,
                           timestamp=Timestamp.now())
             await ctx.send(embeds=embed)
+            logging.warning(f"{ctx.member} has invoked a multi roll of D4. The result was: {result}, amount of dices: {count}.")
         case _:
             await ctx.send("You didn't select a dice. Aborting...")
 
@@ -189,11 +210,13 @@ async def multi_function(ctx: SlashContext, dice: int, count: int, modifier: int
                scopes=server_id)
 @roll_modifier()
 async def custom_single_function(ctx: SlashContext, size: int, title: str, modifier: int = 0):
+    result = CustomRoll.single_custom(size, modifier)
     embed = Embed(title=title,
-                  description=CustomRoll.single_custom(size, modifier),
+                  description=result,
                   color=BrandColors.WHITE,
                   timestamp=Timestamp.now())
     await ctx.send(embeds=embed)
+    logging.warning(f"{ctx.member} has invoked a single roll of custom dice. The result was: {result}.")
 
 
 @slash_command(name="custom_multi",
@@ -222,10 +245,12 @@ async def custom_single_function(ctx: SlashContext, size: int, title: str, modif
                scopes=server_id)
 @roll_modifier()
 async def custom_multi_function(ctx: SlashContext, size: int, count: int, title: str, modifier: int = 0):
+    result = CustomRoll.multi_custom(size, count, modifier)
     embed = Embed(title=title,
-                  description=CustomRoll.multi_custom(size, count, modifier),
+                  description=result,
                   color=BrandColors.WHITE,
                   timestamp=Timestamp.now())
     await ctx.send(embeds=embed)
+    logging.warning(f"{ctx.member} has invoked a multi roll of custom dice. The result was: {result}, amount of dices: {count}.")
 
-bot.start(os.getenv("token"))
+bot.start(os.getenv("TOKEN"))
