@@ -9,7 +9,7 @@ from interactions import listen, slash_command, SlashContext, Client, Intents, S
 bot = Client()
 intents = Intents.DEFAULT
 dotenv.load_dotenv()
-server_id = [1211283623840325632]
+server_id = [YOUR_SERVER_ID]
 logging.basicConfig(filename='logs.txt', filemode='w', format='%(asctime)s - %(message)s', level=logging.WARNING, encoding='utf-8')
 
 
