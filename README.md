@@ -35,11 +35,28 @@ This Vue project uses a ready-to-use Vue component made by **GreenImp**, author 
 
 ### Installation
 
-Instructions on setting up this bot for self-hosting on your own PC can be found [here.]()
+Instructions on setting up this bot for self-hosting on your own PC can be found [here.](https://github.com/TamaKoya/DiscordBot-DiceRoller/wiki/Setting-up-the-bot)
 
-If you plan on running this bot through a hosting, then details about what you need to know can be found [here.]()
+If you plan on running this bot through a hosting, then details about what you need to know can be found [here.](https://github.com/TamaKoya/DiscordBot-DiceRoller/wiki/Notes-for-running-the-bot-through-a-hosting)
 
 If you plan on running this bot on a VPS or anything simillar to that, then I'm afraid you'll have to figure it out on your own, as I do not have any sort of experience with that. Sorry.
+
+***
+
+### How to use the bot
+
+This bot gives a total of 4 Slash Commands to use. Here are their syntax and description.
+
+* /single <dice> <modifier> - Rolls a single dice of choice and adds the modifier to the score. 
+* /multi <count> <dice> <modifier> - Rolls <count> times dice of choice and adds the modifier to the total score, e.g - /multi 4 d6 0 is equivalent to rolling 4 d6 dices, without adding or substracting anything from total score, a.k.a 4d6.
+* /custom_single <size> <title> <modifier> - Rolls a single dice with <size> being maximum number allowed to be rolled and adding modifier to the score. <title> asks the user to give a name for this roll to make it easier for other to understand what the roll was for.
+* /custom_multi <size> <count> <title> <modifier> - Rolls <count> times dices with <size> being maximum number allowed to be rolled for each dice and adding modifier to the total score. <title> asks the user to give a name for this roll to make it easier for other to understand what the roll was for.
+
+Since the bot uses Slash Commands instead of prefixed commands, as user starts typing the chosen command, the bot will ask the user for each required variable of the command as per syntax, thus lowering the risk for user to make a mistake. For <count> the user needs to type a positive number, for <dice> the user will be presented with a list of available dices, where the user just needs to click on one of them, and for <title> the user just needs to type a text that'll become the name of the roll.
+
+After filling each required variable, the user will also have a choice to select the modifier option. If user clicks on the option, they'll be asked to type a number that'll become the modifier. It can be either positive or negative number.
+
+**Modifier in each command is optional, it defaults to 0 if the option is not selected.**
 
 ***
 
