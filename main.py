@@ -6,8 +6,7 @@ from MultiDice import MultiRoll
 from CustomDice import CustomRoll
 from interactions import listen, slash_command, SlashContext, Client, Intents, SlashCommandChoice, OptionType, Embed, BrandColors, SlashCommandOption, slash_option, Timestamp
 
-bot = Client()
-intents = Intents.DEFAULT
+bot = Client(intents = Intents.DEFAULT)
 dotenv.load_dotenv()
 server_id = [YOUR_SERVER_ID]
 logging.basicConfig(filename='logs.txt', filemode='w', format='%(asctime)s - %(message)s', level=logging.WARNING, encoding='utf-8')
